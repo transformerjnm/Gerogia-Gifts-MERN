@@ -1,0 +1,43 @@
+@import '../public/assets/assets.module.scss';
+body {
+    font-family: $reading-font;
+    color: $text-color;
+    font-size: $font0;
+}
+h1{
+    font-size: $font3;
+}
+h2{
+    font-size: $font2;
+}
+h1, h2, h4 {
+    color: $accent-color;
+    font-family: $header-font;
+}
+p {
+    font-size: $font1;
+}
+a, a:visited, i {
+    color: $text-color;
+    transition: all .15s ease-in-out;
+}
+a:hover, a:focus {
+    color: $accent-color;
+    transform: scale(1.05);
+}
+i:hover, i:focus {
+    color: $accent-color;
+    transform: scale(1.2);
+    text-decoration: underline;
+    
+}
+.btn {
+    background-color: $accent-color;
+    color: $off-white;
+    transition: all .25s ease-in-out;
+    border: none;
+    &:hover, &:focus {
+        transform: scale(1.1);
+        background-color: green;
+    }
+}

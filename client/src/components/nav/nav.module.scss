@@ -1,0 +1,36 @@
+@import '../../../public/assets/assets.module.scss';
+nav {
+    background-color: $off-white;
+    box-shadow: 0 .5rem .5rem  lightgrey;
+}
+.cart{
+    font-size: $font1 ;
+    color: $accent-color;
+    &:hover, &:focus {
+        transform: scale(1.2);
+    }
+}
+.navLink {
+    color: $text-color !important;
+    transition: all .15s ease-in-out ;
+    &:hover, &:focus {
+        color: $accent-color !important;
+        transform: scale(1.05) ;
+    }
+}
+.active {
+    color: $accent-color !important;
+}
+button {
+    width: 90%;
+    margin: 5%;
+}
+a:hover {
+    text-decoration: none;
+}
+@media only screen and (min-width: 600px) {
+    button {
+        width: 40%;
+        margin: 5%;
+    }
+}

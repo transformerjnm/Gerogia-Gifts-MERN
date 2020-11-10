@@ -1,0 +1,11 @@
+@import '../../../public/assets/assets.module.scss';
+.borderBottom {
+    border-bottom: 2px solid lightgray;
+    padding: 2rem  0;
+}
+.removeCartItem {
+    color: $accent-color;
+    &:hover {
+        transform: scale(1.2);
+    }
+}

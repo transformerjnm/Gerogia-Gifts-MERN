@@ -1,0 +1,16 @@
+@import '../../../public/assets/assets.module.scss';
+.card { 
+    width: 80%;
+    margin: auto;
+    border-radius: .5rem;
+    border: 2px solid $accent-color;
+    transition: all .25s ease-in-out;
+    &:hover, &:focus {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+}
+.cardImg {
+    height: 300px;
+    border-radius: .5rem;
+}
