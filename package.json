@@ -4,7 +4,7 @@
 	"description": "Node Express Learning project",
 	"main": "server.js",
 	"scripts": {
-		"build": "cd client && npm predeploy",
+		"build": "cd client && npm run predeploy",
 		"dev": "nodemon sever.js",
 		"client": "cd client && npm start",
 		"start": "concurrently --kill-others-on-fail \"npm run client\" \"npm run dev\""
