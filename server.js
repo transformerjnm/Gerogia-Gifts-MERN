@@ -96,7 +96,7 @@ app.get('/user', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-    app.use(express.static('client/build'));
+   res.redirect('/');
 })
 
 //start server
