@@ -28,7 +28,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(cors({
-    origin: "http://localhost:3000", // react app location
+    // react app location -- for testing on localhost - http://localhost:3000
+    origin: "http://localhost:3000", 
     credentials: true
 }))
 
@@ -50,11 +51,11 @@ app.use('/getProduct', getProducts);
 app.post('/login', (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
         if (err) throw err;
-        if (!user) res.send("No User Exists");
+        if (!user) res.json({"body": "No User Exists"});
         else {
           req.logIn(user, (err) => {
             if (err) throw err;
-            res.send("Successfully Authenticated");
+            res.json({ "body": "Successfully Authenticated"});
             console.log(req.user);
           });
         }
@@ -63,15 +64,12 @@ app.post('/login', (req, res, next) => {
 });
 
 app.get('/logout',  (req, res) => {
-    console.log(req)
-    if(req.session){
       req.logout();
-      // console.log('after logout: ', req)
       req.session.destroy(() => {
-        console.log('session destroyed')
+        console.log('session destroyed');
       });
-      res.clearCookie('secretcode')
-    }
+      res.cookie.set("secretcode", {maxAge: 0});
+      res.json({"body": "You have logged out"});
 });
 
 app.post('/register', (req, res) => {
