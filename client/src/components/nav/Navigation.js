@@ -72,7 +72,6 @@ const Navigation = () => {
 		})
 		.then( async (res) => {
 			let body = await res.json();
-			console.log(body);
 			if(body.body != "No User Exists") {
 				alert('You have logged in!');
 				setAuth(true);
@@ -84,7 +83,6 @@ const Navigation = () => {
 	}
 
 	const logout = () => {
-		
 		fetch('/logout', 
 		{
 			method: 'GET',
@@ -98,7 +96,7 @@ const Navigation = () => {
 			alert('You have logged out!');
 		});
 	}
-	console.log(authenticated);
+	
 	return(  
 		<Fragment>
 			<Navbar color="light" light expand="md">

@@ -56,11 +56,9 @@ app.post('/login', (req, res, next) => {
           req.logIn(user, (err) => {
             if (err) throw err;
             res.json({ "body": "Successfully Authenticated"});
-            console.log(req.user);
           });
         }
       })(req, res, next);
-    console.log(req.body)
 });
 
 app.get('/logout',  (req, res) => {
@@ -87,10 +85,6 @@ app.post('/register', (req, res) => {
             res.send("User Created");
         }
     });
-});
-
-app.get('/user', (req, res) => {
-    console.log("/user");
 });
 
 app.get('/*', (req, res) => {
