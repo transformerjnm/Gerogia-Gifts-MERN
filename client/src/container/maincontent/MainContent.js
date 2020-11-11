@@ -37,7 +37,7 @@ class MainContent extends Component {
                 <Route exact path='/' >
                     <Home addCartItem={addCartItem}/>
                 </Route>
-                <Route exact path='/georgia-gifts-react' >
+                <Route exact path='/' >
                     <Home addCartItem={addCartItem}/>
                 </Route>
                 <Route path='/about' >

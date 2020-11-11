@@ -10,7 +10,7 @@ const Navigation = () => {
 	const [modal, setModal] = useState(false);
 	const [errors, setErrors] = useState({username: '', password: ''});
 	const [ formValues, setFormValues] = useState({username: '', password: ''});
-	//const [ authenticated,  setAuth ] = useState(false);
+	const [ authenticated,  setAuth ] = useState(false);
 
 	const toggleNav = () => setIsOpen(!isOpen);
 	const toggleModal = () => setModal(!modal);
@@ -34,7 +34,6 @@ const Navigation = () => {
 		}
 	};
 
-	/*
 	const onSubmit = event => { event.preventDefault(); }
 
 	const register = () => {
@@ -58,7 +57,6 @@ const Navigation = () => {
 	}
 
 	const login = () => {
-		
 		toggleModal();
 		fetch('/login', 
 		{
@@ -86,6 +84,7 @@ const Navigation = () => {
 			}
 		}).catch( err => console.log('Login failed', err));
 	}
+
 	const logout = () => {
 		alert('You have logged out!', authenticated);
 		fetch('/logout', 
@@ -98,7 +97,6 @@ const Navigation = () => {
 		})
 		.then( res => setAuth(false));
 	}
-	*/
 	
 	return(  
 		<Fragment>
@@ -115,7 +113,7 @@ const Navigation = () => {
 				<NavItem>
 					<NavLink activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/contact">Contact</NavLink>
 				</NavItem>
-				{ /*
+				{/*
 				<NavItem>
 					<a className={styles.navLink} style={{fontSize: "1rem", display: "block", padding: "0.5rem 1rem"}} onClick={toggleModal}>Login</a>
 				</NavItem>
@@ -127,7 +125,6 @@ const Navigation = () => {
 				<Link to="/cart"><FontAwesomeIcon icon={faShoppingCart} className={styles.cart}/></Link>
 			</Collapse>
 			</Navbar> 
-			 { /* 
 			 <Modal isOpen={modal} toggle={toggleModal} >
 				<ModalHeader className="my-1" toggle={toggleModal}>
 					<h4>Welcome!</h4>
@@ -152,8 +149,6 @@ const Navigation = () => {
 					</Form>
 				</ModalBody>			
 			</Modal>
-			*/}
-
 		</Fragment>
 	);
 };
