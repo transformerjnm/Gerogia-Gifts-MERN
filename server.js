@@ -91,10 +91,13 @@ app.post('/register', (req, res) => {
     });
 });
 
-
 app.get('/user', (req, res) => {
     console.log("/user");
 });
+
+app.get('/about', (req, res) => {
+    app.use(express.static('client/build'));
+})
 
 //start server
 app.listen( PORT, () => {
