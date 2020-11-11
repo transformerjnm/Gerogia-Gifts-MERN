@@ -96,7 +96,7 @@ app.get('/user', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-   res.redirect('/');
+   res.redirect('/about');
 })
 
 //start server
