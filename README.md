@@ -6,4 +6,4 @@ A gift shop website that is powerder by Mongo, Express, React.js, and Node.js
 
 To run this project use npm start or yarn start 
 
-<img href="https://github.com/transformerjnm/Gerogia-Gifts-MERN/blob/main/GeorgiaGiftsMERN.JPG" alt="Picture of Gerogia Gifts React website home page." />
+<img src="https://github.com/transformerjnm/Gerogia-Gifts-MERN/blob/main/GeorgiaGiftsMERN.JPG" alt="Picture of Gerogia Gifts React website home page." />
