@@ -95,8 +95,8 @@ app.get('/user', (req, res) => {
     console.log("/user");
 });
 
-app.get('/about', (req, res) => {
-   res.redirect('/about');
+app.get('/*', (req, res) => {
+   res.redirect('/');
 })
 
 //start server
