@@ -47,8 +47,7 @@ const Navigation = () => {
 			body: JSON.stringify({
 				username: formValues.username,
 				password: formValues.password
-			}),
-			credentials: 'include'
+			})
 		})
 		.then( res => {
 			return res.json();
@@ -68,36 +67,38 @@ const Navigation = () => {
 			body: JSON.stringify({
 				username: formValues.username,
 				password: formValues.password
-			}),
-			credentials: 'include'
+			})
+			
 		})
-		.then( res => {
-			console.log(res)
-			return res;
-		})
-		.then( res => {
-			if(res) {
-				alert('You have logged in!', authenticated);
+		.then( async (res) => {
+			let body = await res.json();
+			console.log(body);
+			if(body.body != "No User Exists") {
+				alert('You have logged in!');
 				setAuth(true);
 			} else {
 				alert('incorrect username or password.');
 			}
 		}).catch( err => console.log('Login failed', err));
+		
 	}
 
 	const logout = () => {
-		alert('You have logged out!', authenticated);
+		
 		fetch('/logout', 
 		{
 			method: 'GET',
 			mode: 'cors',
 			headers: {
 				'Content-Type': 'application/json'
-			},
+			}
 		})
-		.then( res => setAuth(false));
+		.then( res => {
+			setAuth(false)
+			alert('You have logged out!');
+		});
 	}
-	
+	console.log(authenticated);
 	return(  
 		<Fragment>
 			<Navbar color="light" light expand="md">
@@ -113,14 +114,14 @@ const Navigation = () => {
 				<NavItem>
 					<NavLink activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/contact">Contact</NavLink>
 				</NavItem>
-				{/*
+			
 				<NavItem>
 					<a className={styles.navLink} style={{fontSize: "1rem", display: "block", padding: "0.5rem 1rem"}} onClick={toggleModal}>Login</a>
 				</NavItem>
 				<NavItem>
 					<a className={styles.navLink} style={{fontSize: "1rem", display: "block", padding: "0.5rem 1rem"}} onClick={logout}>Logout</a>
 				</NavItem>
-				*/}
+			
 				</Nav>        
 				<Link to="/cart"><FontAwesomeIcon icon={faShoppingCart} className={styles.cart}/></Link>
 			</Collapse>
