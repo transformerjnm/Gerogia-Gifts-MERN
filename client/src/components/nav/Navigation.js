@@ -11,15 +11,19 @@ const Navigation = () => {
 	const [errors, setErrors] = useState({username: '', password: ''});
 	const [ formValues, setFormValues] = useState({username: '', password: ''});
 	const [ authenticated,  setAuth ] = useState(false);
+	const [ authUsername, setAuthName ] = useState('');
 
 	const toggleNav = () => setIsOpen(!isOpen);
 	const toggleModal = () => setModal(!modal);
 
-	//if info is required check and makes sure it is not empty
 	const validateInput = target => {
 		if (target.required) {
 			if (target.value === null || target.value === "") {
 				setErrors( { ...errors, ...{ [target.name]: "This field is required and must not be Blank."} } );
+				return false;
+			}
+			if (target.value.length < 4 ) {
+				setErrors( { ...errors, ...{ [target.name]: "This field must be at least 4 characters long."} } );
 				return false;
 			}
 		}
@@ -48,11 +52,19 @@ const Navigation = () => {
 				username: formValues.username,
 				password: formValues.password
 			})
-		})
-		.then( res => {
-			return res.json();
-		})
-		.then( res => console.log(res));
+		})	
+		.then( async (res) => {
+			let body = await res.json();
+			if(body.body == "User Created") {
+				alert('Your account has been created!');
+				setAuth(true);
+				setAuthName(formValues.username);
+			} else if (body.body == "User already exist") {
+				alert('User already exist');
+			} else {
+				alert('Failure to signup. Please try again');
+			}
+		}).catch( err => console.log("register Failed", err));
 	}
 
 	const login = () => {
@@ -75,11 +87,11 @@ const Navigation = () => {
 			if(body.body != "No User Exists") {
 				alert('You have logged in!');
 				setAuth(true);
+				setAuthName(formValues.username);
 			} else {
 				alert('incorrect username or password.');
 			}
 		}).catch( err => console.log('Login failed', err));
-		
 	}
 
 	const logout = () => {
@@ -92,34 +104,37 @@ const Navigation = () => {
 			}
 		})
 		.then( res => {
-			setAuth(false)
+			setAuth(false);
+			setAuthName('');
 			alert('You have logged out!');
-		});
+		}).catch( err => console.log("logout Failed", err));
 	}
-	
+
+	let authenticationButton;
+	if (authenticated) {
+		authenticationButton = <a className={styles.navLink} style={{fontSize: "1rem", display: "block"}} onClick={logout}>Logout</a>;
+	} else {
+		authenticationButton = <a className={styles.navLink} style={{fontSize: "1rem", display: "block"}} onClick={toggleModal}>Login</a>;
+	}
+
 	return(  
 		<Fragment>
 			<Navbar color="light" light expand="md">
 			<NavbarToggler onClick={toggleNav} />
 			<Collapse isOpen={isOpen} navbar>
 				<Nav className="mr-auto" navbar>
-				<NavItem>
-					<NavLink exact activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/">Home</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/about">About</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/contact">Contact</NavLink>
-				</NavItem>
-			
-				<NavItem>
-					<a className={styles.navLink} style={{fontSize: "1rem", display: "block", padding: "0.5rem 1rem"}} onClick={toggleModal}>Login</a>
-				</NavItem>
-				<NavItem>
-					<a className={styles.navLink} style={{fontSize: "1rem", display: "block", padding: "0.5rem 1rem"}} onClick={logout}>Logout</a>
-				</NavItem>
-			
+					<NavItem>
+						<NavLink exact activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/">Home</NavLink>
+					</NavItem>
+					<NavItem>
+						<NavLink activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/about">About</NavLink>
+					</NavItem>
+					<NavItem>
+						<NavLink activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/contact">Contact</NavLink>
+					</NavItem>
+					<NavItem>
+						{authenticationButton}
+					</NavItem>			
 				</Nav>        
 				<Link to="/cart"><FontAwesomeIcon icon={faShoppingCart} className={styles.cart}/></Link>
 			</Collapse>

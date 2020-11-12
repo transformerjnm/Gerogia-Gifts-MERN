@@ -74,7 +74,7 @@ app.post('/register', (req, res) => {
     User.findOne({username: req.body.username}, async (err, doc) => {
         if(err) { throw err; } 
         else if(doc) {
-            res.send("User already Exists");
+            res.json({"body": "User already exist"});
         } else {
             const hashPassword = await bcrypt.hash(req.body.password, 10);
             const newUser = new User({
@@ -82,7 +82,7 @@ app.post('/register', (req, res) => {
                 password: hashPassword
             });
             await newUser.save();
-            res.send("User Created");
+            res.json({"body": "User Created"});
         }
     });
 });

@@ -11,6 +11,7 @@ nav {
     }
 }
 .navLink {
+    padding: 0.5rem 0rem;
     color: $text-color !important;
     transition: all .15s ease-in-out ;
     &:hover, &:focus {
