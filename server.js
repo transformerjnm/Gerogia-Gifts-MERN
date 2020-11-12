@@ -66,7 +66,6 @@ app.get('/logout',  (req, res) => {
       req.session.destroy(() => {
         console.log('session destroyed');
       });
-      res.cookie.set("secretcode", {maxAge: 0});
       res.json({"body": "You have logged out"});
 });
 
