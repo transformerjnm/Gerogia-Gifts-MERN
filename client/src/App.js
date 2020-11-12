@@ -9,10 +9,8 @@ import { BrowserRouter } from 'react-router-dom';
 function App() {
   return ( 
     <Fragment>
-		<BrowserRouter >
-    		<Header /> 	
+		<BrowserRouter >			
         	<MainContent />    	
-      		<Footer />
 		</BrowserRouter>
     </Fragment>  
   );

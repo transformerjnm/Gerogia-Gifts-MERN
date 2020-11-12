@@ -5,13 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import styles from './nav.module.scss';
 
-const Navigation = () => {
+const Navigation = (props) => {
+	//state for authenticated and authUsername are stored in mainContent
 	const [isOpen, setIsOpen] = useState(false);
 	const [modal, setModal] = useState(false);
 	const [errors, setErrors] = useState({username: '', password: ''});
 	const [ formValues, setFormValues] = useState({username: '', password: ''});
-	const [ authenticated,  setAuth ] = useState(false);
-	const [ authUsername, setAuthName ] = useState('');
 
 	const toggleNav = () => setIsOpen(!isOpen);
 	const toggleModal = () => setModal(!modal);
@@ -57,8 +56,8 @@ const Navigation = () => {
 			let body = await res.json();
 			if(body.body == "User Created") {
 				alert('Your account has been created!');
-				setAuth(true);
-				setAuthName(formValues.username);
+				props.setAuth(true);
+				props.setAuthName(formValues.username);
 			} else if (body.body == "User already exist") {
 				alert('User already exist');
 			} else {
@@ -86,8 +85,8 @@ const Navigation = () => {
 			let body = await res.json();
 			if(body.body != "No User Exists") {
 				alert('You have logged in!');
-				setAuth(true);
-				setAuthName(formValues.username);
+				props.setAuth(true);
+				props.setAuthName(formValues.username);
 			} else {
 				alert('incorrect username or password.');
 			}
@@ -104,19 +103,19 @@ const Navigation = () => {
 			}
 		})
 		.then( res => {
-			setAuth(false);
-			setAuthName('');
+			props.setAuth(false);
+			props.setAuthName('');
 			alert('You have logged out!');
 		}).catch( err => console.log("logout Failed", err));
 	}
 
 	let authenticationButton;
-	if (authenticated) {
+	if (props.authenticated) {
 		authenticationButton = <a className={styles.navLink} style={{fontSize: "1rem", display: "block"}} onClick={logout}>Logout</a>;
 	} else {
 		authenticationButton = <a className={styles.navLink} style={{fontSize: "1rem", display: "block"}} onClick={toggleModal}>Login</a>;
 	}
-
+	
 	return(  
 		<Fragment>
 			<Navbar color="light" light expand="md">

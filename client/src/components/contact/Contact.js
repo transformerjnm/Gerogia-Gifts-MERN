@@ -1,9 +1,9 @@
 import React from 'react';
 import ContactForm from '../form/ContactForm';
 
-const Contact = () => {
+const Contact = props => {
     return(
-        <ContactForm />
+        <ContactForm authenticated={props.authenticated} authUsername={props.authUsername}/>
     );
 };
 
