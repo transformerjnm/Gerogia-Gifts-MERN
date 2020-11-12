@@ -58,7 +58,7 @@ const Cart = (props) => {
 
             let cartDisplay = <Row className="mt-5"><p>Looks like your cart is empty. Please add some awesome stuff to the cart to proceed. </p></Row>;
             if(props.authenticated) {
-                cartDisplay = <Row className="mt-5"><p>{`${props.authUsername}, You cart is empty! Please add some awesome stuff to the cart to proceed.`}</p></Row>;
+                cartDisplay = <Row className="mt-5"><p>{`${props.authUsername}, Your cart is empty! Please add some awesome stuff to the cart to proceed.`}</p></Row>;
             }
             if(cartProductsDisplay.length){
                 cartDisplay = (
