@@ -3,7 +3,7 @@ import { Row, Container, Spinner } from 'reactstrap';
 import ProductCard from '../productCard/ProductCard';
 import ContactForm from '../form/ContactForm';
 
-const Home = (props) => {
+const Home = props => {
     let [products, setProducts] = useState([]);
     
     useEffect(() => {
@@ -31,7 +31,7 @@ const Home = (props) => {
         }
         return bestSellersCards;
     };
-
+ 
     return(
         <Fragment>
             <Container>
@@ -41,7 +41,7 @@ const Home = (props) => {
                 </Row>
             </Container>
             <Container>
-                <ContactForm />
+                <ContactForm authenticated={props.authenticated} authUsername={props.authUsername}/>
             </Container>
         </Fragment>
     );

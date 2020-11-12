@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import Nav from '../../components/nav/Navigation';
 import HeroContent from '../../components/herocontent/HeroContent';
 
-const Header = () => {
+const Header = (props) => {
     return(
         <Fragment>
-            <Nav />
+            <Nav setAuthName={props.setAuthName} setAuth={props.setAuth} authenticated={props.authenticated} authUsername={props.authUsername} />
             <HeroContent />
         </Fragment>    
     );

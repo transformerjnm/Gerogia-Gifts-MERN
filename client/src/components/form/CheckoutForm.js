@@ -65,7 +65,7 @@ class ContactForm extends Component {
                     <FormGroup className="mb-5">
                         <h4>Who are you?</h4>
                         <Label className="mt-4"  for="name" > Your Name *</Label>
-                        <Input className="form-control mb-4" type="text" name="name" id="name" maxLength="60" required invalid={errors.name} onBlur={this.onBlur}/>
+                        <Input className="form-control mb-4" type="text" name="name" id="name" maxLength="60" required invalid={errors.name} onBlur={this.onBlur} value={this.props.authUsername}/>
                         <FormFeedback className={styles.feedback}>{errors.name}</FormFeedback>
                         <Label className="mt-4" for="email">Your Email *</Label>
                         <Input className="form-control mb-4" type="email" name="email" id="email" required invalid={errors.email} onBlur={this.onBlur}/>
