@@ -1,7 +1,8 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Container, Spinner } from 'reactstrap';
 import ProductCard from '../productCard/ProductCard';
 import ContactForm from '../form/ContactForm';
+import Fade from 'react-reveal/Fade';
 
 const Home = props => {
     let [products, setProducts] = useState([]);
@@ -33,17 +34,17 @@ const Home = props => {
     };
  
     return(
-        <Fragment>
-            <Container>
-                <h2 className="text-center my-5 py-5">Best Sellers</h2>
-                <Row>                 
-                    { getFeaturedProducts() }                  
-                </Row>
-            </Container>
-            <Container>
-                <ContactForm authenticated={props.authenticated} authUsername={props.authUsername}/>
-            </Container>
-        </Fragment>
+        <Fade left>
+                <Container>
+                    <h2 className="text-center my-5 py-5">Best Sellers</h2>
+                    <Row>                 
+                        { getFeaturedProducts() }                  
+                    </Row>
+                </Container>
+                <Container>
+                    <ContactForm authenticated={props.authenticated} authUsername={props.authUsername}/>
+                </Container>
+        </Fade>
     );
 };
 

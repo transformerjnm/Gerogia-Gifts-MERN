@@ -1,6 +1,7 @@
 import React from 'react';
 import { Jumbotron, Row, Col } from 'reactstrap';
 import styles from './heroContent.module.scss';
+import Jump from 'react-reveal/Jump';
 
 const HeroContent = (props) => {
     return (
@@ -10,7 +11,9 @@ const HeroContent = (props) => {
                     <img src={process.env.PUBLIC_URL + '/assets/images/logo.png'}  className={styles.logo + " img-fluid"} alt="Orange Peach logo for Georgia Gifts" />
                 </Col>
                 <Col sm="8" className="align-self-center mt-5 text-center text-md-left">
-                    <h1>Custom southern Gifts</h1>
+                    <Jump>
+                        <h1>Custom southern Gifts</h1>
+                    </Jump>
                 </Col>
             </Row>
             <Row>

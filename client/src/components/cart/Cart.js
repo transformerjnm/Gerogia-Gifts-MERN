@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import styles from './cart.module.scss';
 import CheckoutForm from '../form/CheckoutForm';
+import Fade from 'react-reveal/Fade';
 
 const Cart = (props) => {
     let [products, setProducts] = useState([]);
@@ -83,9 +84,11 @@ const Cart = (props) => {
         }
     };
     return(
-        <Container>
-            {showCartProducts()}
-        </Container>
+        <Fade left>
+            <Container>
+                {showCartProducts()}
+            </Container>
+        </Fade>
     );
 };
 

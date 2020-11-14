@@ -1,9 +1,12 @@
 import React from 'react';
 import ContactForm from '../form/ContactForm';
+import Fade from 'react-reveal/Fade';
 
 const Contact = props => {
     return(
-        <ContactForm authenticated={props.authenticated} authUsername={props.authUsername}/>
+        <Fade left>
+            <ContactForm authenticated={props.authenticated} authUsername={props.authUsername}/>
+        </Fade>
     );
 };
 

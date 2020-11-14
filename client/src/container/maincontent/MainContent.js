@@ -46,7 +46,7 @@ const MainContent = props => {
                 <Footer />
             </Route>      
             <Route path='/contact' >
-                <Header setAuthName={setAuthName} setAuth={setAuth} authenticated={authenticated} authUsername={authUsername} /> 
+                <Header setAuthName={setAuthName} setAuth={setAuth} authenticated={authenticated} authUsername={authUsername} /> 	
                 <Contact authenticated={authenticated} authUsername={authUsername} />
                 <Footer />
             </Route>
