@@ -1,5 +1,5 @@
 {
-	"name": "Georgia Gifts",
+	"name": "node-express",
 	"version": "1.0.0",
 	"description": "Express api for Georgia Gifts",
 	"main": "server.js",
