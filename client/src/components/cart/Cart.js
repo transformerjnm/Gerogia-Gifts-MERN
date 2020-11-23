@@ -10,7 +10,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import styles from './cart.module.scss';
 import CheckoutForm from '../form/CheckoutForm';
+import StripeCart from './StripeCart';
 import Fade from 'react-reveal/Fade';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+// Make sure to call loadStripe outside of a component’s render to avoid recreating the Stripe object on every render.
+const promise = loadStripe('pk_test_51HqS6pFKwuTnRfKPpKVtZSpzHi9oYisYPY2NmRlofKHmuQkgr7k0LiZL11T53fXqb1YYm7gYNkvbzCR9WnFtPGMM00w4HunDuD');
 
 const Cart = (props) => {
     let [products, setProducts] = useState([]);
@@ -18,6 +24,8 @@ const Cart = (props) => {
     useEffect(() => {
         getData().then(res => setProducts(res));
     }, []);
+
+    
 
     let getData = async () => {
         const response = await fetch('/getProduct');
@@ -88,6 +96,9 @@ const Cart = (props) => {
             <Container>
                 {showCartProducts()}
             </Container>
+            <Elements stripe={promise} >
+                <StripeCart />
+            </Elements>
         </Fade>
     );
 };
