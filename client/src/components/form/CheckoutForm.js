@@ -4,24 +4,14 @@ import { Button, Form, FormGroup, Label, Input, FormFeedback, Modal, ModalBody, 
 
 class ContactForm extends Component {
     state = {
+        modalOpen: false,
         name: null,
         email: null,
-        sAddress: null,
-        bAddress: null,
-        cardName: null,
-        cardNum: null,
-        cardDate: null,
-        cardCvv: null,
-        modalOpen: false,
+        Address: null,
         errors: {
             name: null,
             email: null,
             sAddress: null,
-            bAddress: null,
-            cardName: null,
-            cardNum: null,
-            cardDate: null,
-            cardCvv: null,
         },
     };
 
@@ -73,22 +63,13 @@ class ContactForm extends Component {
                     </FormGroup>
                     <FormGroup className="mt-5">
                         <h4 className="mt-5">Where can we ship your goods?</h4>
-                        <Label className="mt-4"  for="sAddress">Shipping Address * </Label>
-                        <Input className="form-control mb-4" type="text" name="sAddress" id="sAddress" onBlur={this.onBlur} spellCheck="true" required/>
+                        <Label className="mt-4"  for="Address">Address </Label>
+                        <Input className="form-control mb-4" type="text" name="Address" id="Address" onBlur={this.onBlur} spellCheck="true" required/>
                         <Label className="mt-4"  for="bAddress">Billing Address * </Label>
                         <Input className="form-control mb-4" type="text" name="bAddress" id="bAddress" onBlur={this.onBlur} spellCheck="true" required/>
                     </FormGroup>
-                    <FormGroup>
-                        <h4 className="mt-5">How are you paying today?</h4>
-                        <Label className="mt-4"  for="cardName">Name on Card * </Label>
-                        <Input className="form-control mb-4" type="text" name="cardName" id="cardName" onBlur={this.onBlur} spellCheck="true" required/>
-                        <Label className="mt-4"  for="cardNum">Card Number * </Label>
-                        <Input className="form-control mb-4" type="text" name="cardNum" id="cardNum" onBlur={this.onBlur} spellCheck="true" required/>
-                        <Label className="mt-4"  for="cardDate">Card Expiration Date * </Label>
-                        <Input className="form-control mb-4" type="text" name="cardDate" id="cardDate" onBlur={this.onBlur} spellCheck="true" required/>
-                        <Label className="mt-4"  for="cardCvv">Card CVV * </Label>
-                        <Input className="form-control mb-4" type="text" name="cardCvv" id="cardCvv" onBlur={this.onBlur} spellCheck="true" required/>
-                    </FormGroup>
+                    <h4 className="mt-5">How are you paying today?</h4>
+                      
                     <Button type="submit" className="btn">Submit</Button>
                 </Form>
                 <Modal isOpen={this.state.modalOpen} toggle={this.toggleModal}>

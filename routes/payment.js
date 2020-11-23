@@ -1,6 +1,6 @@
 const express = require('express');
 const PaymentRouter = express.Router();
-const stripe = require("stripe")('sk_test_51HqS6pFKwuTnRfKPh8BTsJwQfPJAsAPA60YN2tbvOrziUMO2RwUsrTcgET1G58B1vUoIszQqFyHGz25Nsne09fXw00BWtyFD9Y');
+const stripe = require("stripe")('sk_test_51HqS6pFKwuTnRfKPLEfWZMezNe9Ft3IOyb7Ul1uH9XWKkKZpFBDmJfBt2mAQS8SJMkx0vWbAS4xVrVTGCGCTXxjq00Ll6d2DIC');
 
 const calculateOrderAmount = items => {
 	// Replace this constant with a calculation of the order's amount

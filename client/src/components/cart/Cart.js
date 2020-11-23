@@ -16,7 +16,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
 // Make sure to call loadStripe outside of a component’s render to avoid recreating the Stripe object on every render.
-const promise = loadStripe('pk_test_51HqS6pFKwuTnRfKPpKVtZSpzHi9oYisYPY2NmRlofKHmuQkgr7k0LiZL11T53fXqb1YYm7gYNkvbzCR9WnFtPGMM00w4HunDuD');
+const promise = loadStripe('pk_test_51HqS6pFKwuTnRfKPpMwhTSyr51ulMuZTv1Lug6en1TupJ8mjNx7HJfkVcCRVn7AzvtNS3eKzTpo6ciPaxXaUMPYt00Cezl4u2O');
 
 const Cart = (props) => {
     let [products, setProducts] = useState([]);
@@ -48,9 +48,10 @@ const Cart = (props) => {
     };
 
     //creates and returns JSX that shows all the items in the cart
+    let total = 0.00;
     let showCartProducts = () => {
         let cartProducts = getProductsInfoById();
-        let total = 0.00;
+        
         if(cartProducts) {
             let key = 1;
             //calculate total and make each product jsx display
@@ -97,7 +98,7 @@ const Cart = (props) => {
                 {showCartProducts()}
             </Container>
             <Elements stripe={promise} >
-                <StripeCart />
+                <StripeCart total={total} authenticated={props.authenticated} authUsername={props.authUsername}/>
             </Elements>
         </Fade>
     );
