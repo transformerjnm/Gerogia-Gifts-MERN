@@ -9,7 +9,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
 // Make sure to call loadStripe outside of a component’s render to avoid recreating the Stripe object on every render.
-const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+const promise = loadStripe('pk_test_51HqS6pFKwuTnRfKPpld5DydVwJjDRH6UPLJt7ckvZLLg3ojOr7SVZtMs2Q6XbrSPnAvq2r0dothg19TfPRnLqD9H00UbMPSlJZ');
 const Cart = (props) => {
     let [products, setProducts] = useState([]);
 
