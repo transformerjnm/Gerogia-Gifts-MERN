@@ -12,7 +12,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 require('dotenv/config');
 
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -49,9 +48,6 @@ app.use('/login', login);
 app.use('/logout', logout);
 app.use('/register', register);
 app.use('/payment', payment);
-
-
-
 
 //if page reloads on heroku and is on a route(about, contact, cart) heroku will not send it to react router. so we redirect to prevent error can not get(404)
 app.get('/*', (req, res) => {

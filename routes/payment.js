@@ -1,6 +1,7 @@
 const express = require('express');
 const PaymentRouter = express.Router();
-const stripe = require("stripe")('sk_test_51HqS6pFKwuTnRfKPLEfWZMezNe9Ft3IOyb7Ul1uH9XWKkKZpFBDmJfBt2mAQS8SJMkx0vWbAS4xVrVTGCGCTXxjq00Ll6d2DIC');
+require('dotenv/config');
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const calculateOrderAmount = items => {
 	// Replace this constant with a calculation of the order's amount

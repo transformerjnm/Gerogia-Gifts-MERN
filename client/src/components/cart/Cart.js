@@ -1,11 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import {
-    Row,
-    Col,
-    Button,
-    Container,
-    Spinner
-} from 'reactstrap';
+import { Row, Col, Button, Container, Spinner } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import styles from './cart.module.scss';
@@ -15,8 +9,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
 // Make sure to call loadStripe outside of a component’s render to avoid recreating the Stripe object on every render.
-const promise = loadStripe('pk_test_51HqS6pFKwuTnRfKPpMwhTSyr51ulMuZTv1Lug6en1TupJ8mjNx7HJfkVcCRVn7AzvtNS3eKzTpo6ciPaxXaUMPYt00Cezl4u2O');
-
+const promise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const Cart = (props) => {
     let [products, setProducts] = useState([]);
 
@@ -74,7 +67,7 @@ const Cart = (props) => {
                         <Row className="mt-5" ><Col className="text-right"><p> Total: ${total.toFixed(2)} </p></Col></Row>
                         <Row className="mt-5" ><Col className="text-right"><p> Total After Tax(7%): ${( total * 1.07 ).toFixed( 2 )}</p></Col></Row>
                         <Elements stripe={promise} >
-                            <StripeCart total={total} authenticated={props.authenticated} authUsername={props.authUsername}/>
+                            <StripeCart getCartItemsId={props.getCartItemsId} authenticated={props.authenticated} authUsername={props.authUsername}/>
                         </Elements>      
                     </Fragment>
                 );
