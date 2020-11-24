@@ -9,8 +9,13 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import styles from './cart.module.scss';
-import CheckoutForm from '../form/CheckoutForm';
+import StripeCart from '../form/StripeCart';
 import Fade from 'react-reveal/Fade';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+// Make sure to call loadStripe outside of a component’s render to avoid recreating the Stripe object on every render.
+const promise = loadStripe('pk_test_51HqS6pFKwuTnRfKPpMwhTSyr51ulMuZTv1Lug6en1TupJ8mjNx7HJfkVcCRVn7AzvtNS3eKzTpo6ciPaxXaUMPYt00Cezl4u2O');
 
 const Cart = (props) => {
     let [products, setProducts] = useState([]);
@@ -40,9 +45,10 @@ const Cart = (props) => {
     };
 
     //creates and returns JSX that shows all the items in the cart
+    let total = 0.00;
     let showCartProducts = () => {
         let cartProducts = getProductsInfoById();
-        let total = 0.00;
+        
         if(cartProducts) {
             let key = 1;
             //calculate total and make each product jsx display
@@ -56,7 +62,6 @@ const Cart = (props) => {
                     </Row>
                 );
             });
-
             let cartDisplay = <Row className="mt-5"><p>Looks like your cart is empty. Please add some awesome stuff to the cart to proceed. </p></Row>;
             if(props.authenticated) {
                 cartDisplay = <Row className="mt-5"><p>{`${props.authUsername}, Your cart is empty! Please add some awesome stuff to the cart to proceed.`}</p></Row>;
@@ -68,7 +73,9 @@ const Cart = (props) => {
                         {cartProductsDisplay}            
                         <Row className="mt-5" ><Col className="text-right"><p> Total: ${total.toFixed(2)} </p></Col></Row>
                         <Row className="mt-5" ><Col className="text-right"><p> Total After Tax(7%): ${( total * 1.07 ).toFixed( 2 )}</p></Col></Row>
-                        <CheckoutForm total={total} authenticated={props.authenticated} authUsername={props.authUsername}/>        
+                        <Elements stripe={promise} >
+                            <StripeCart total={total} authenticated={props.authenticated} authUsername={props.authUsername}/>
+                        </Elements>      
                     </Fragment>
                 );
             }
