@@ -36,6 +36,8 @@ i:hover, i:focus {
     color: $off-white;
     transition: all .25s ease-in-out;
     border: none;
+    width: 100%;
+    margin: auto;
     &:hover, &:focus {
         transform: scale(1.1);
         background-color: green;

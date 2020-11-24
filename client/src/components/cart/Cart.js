@@ -9,8 +9,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import styles from './cart.module.scss';
-import CheckoutForm from '../form/CheckoutForm';
-import StripeCart from './StripeCart';
+import StripeCart from '../form/StripeCart';
 import Fade from 'react-reveal/Fade';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -24,8 +23,6 @@ const Cart = (props) => {
     useEffect(() => {
         getData().then(res => setProducts(res));
     }, []);
-
-    
 
     let getData = async () => {
         const response = await fetch('/getProduct');
@@ -65,7 +62,6 @@ const Cart = (props) => {
                     </Row>
                 );
             });
-
             let cartDisplay = <Row className="mt-5"><p>Looks like your cart is empty. Please add some awesome stuff to the cart to proceed. </p></Row>;
             if(props.authenticated) {
                 cartDisplay = <Row className="mt-5"><p>{`${props.authUsername}, Your cart is empty! Please add some awesome stuff to the cart to proceed.`}</p></Row>;
@@ -77,7 +73,9 @@ const Cart = (props) => {
                         {cartProductsDisplay}            
                         <Row className="mt-5" ><Col className="text-right"><p> Total: ${total.toFixed(2)} </p></Col></Row>
                         <Row className="mt-5" ><Col className="text-right"><p> Total After Tax(7%): ${( total * 1.07 ).toFixed( 2 )}</p></Col></Row>
-                        <CheckoutForm total={total} authenticated={props.authenticated} authUsername={props.authUsername}/>        
+                        <Elements stripe={promise} >
+                            <StripeCart total={total} authenticated={props.authenticated} authUsername={props.authUsername}/>
+                        </Elements>      
                     </Fragment>
                 );
             }
@@ -97,9 +95,6 @@ const Cart = (props) => {
             <Container>
                 {showCartProducts()}
             </Container>
-            <Elements stripe={promise} >
-                <StripeCart total={total} authenticated={props.authenticated} authUsername={props.authUsername}/>
-            </Elements>
         </Fade>
     );
 };
