@@ -5,34 +5,37 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const Product = require('../models/product');
 
 let getProductsInfoById = async (products, cartItemsId ) => {  
-	try {
-		//console.log("Products", products);
-		//console.log("Cart ITems ID:", cartItemsId);	
-		/*let customerProductsInfo = cartItemsId.map( (singleId) => {
+	try {	
+		let customerProductsInfo = cartItemsId.map( (singleId) => {
 			let item = Object.values(products[0]).filter( product => product.id === singleId)
 			return item[0];
-		});*/
-		//console.log(products[0]);
-		//Object.values(products[0]).forEach((product) => {console.log(product)});
-		return 1400;
+		});
+		//console.log(parseFloat(customerProductsInfo[0].price));	
+		return customerProductsInfo;
 	} catch(err) { console.log(err) }
 };
 
 const calculateOrderAmount = async itemsID => {
+	let total = 0.00;
 	try {
 		let cartProducts = [];
-		const allProducts = await Product.find();
-		console.log(allProducts);
+		const allProducts = await Product.find().lean();
+		
 		if(allProducts.length > 0) { 
 			cartProducts = await getProductsInfoById(allProducts, itemsID);
+			//calc total
+			if(cartProducts) {
+				cartProducts.forEach(product => {
+					total += parseFloat(product.price);
+				});
+				//convert to stripe form. in pennies.
+				total = total * 100;
+			}
 		}
-		return 1400;
+		return total;
     } catch(err){
         console.log(err);
     }
-	// Replace this constant with a calculation of the order's amount
-	// Calculate the order total on the server to prevent
-	// people from directly manipulating the amount on the client
 };
 
 PaymentRouter.route('/')
