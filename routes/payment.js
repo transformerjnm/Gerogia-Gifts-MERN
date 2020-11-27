@@ -2,25 +2,55 @@ const express = require('express');
 const PaymentRouter = express.Router();
 require('dotenv/config');
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const Product = require('../models/product');
 
-const calculateOrderAmount = items => {
-	// Replace this constant with a calculation of the order's amount
-	// Calculate the order total on the server to prevent
-	// people from directly manipulating the amount on the client
-	return 1400;
+let getProductsInfoById = async (products, cartItemsId ) => {  
+	try {	
+		let customerProductsInfo = cartItemsId.map( (singleId) => {
+			let item = Object.values(products[0]).filter( product => product.id === singleId)
+			return item[0];
+		});
+		//console.log(parseFloat(customerProductsInfo[0].price));	
+		return customerProductsInfo;
+	} catch(err) { console.log(err) }
+};
+
+const calculateOrderAmount = async itemsID => {
+	let total = 0.00;
+	try {
+		let cartProducts = [];
+		const allProducts = await Product.find().lean();
+		
+		if(allProducts.length > 0) { 
+			cartProducts = await getProductsInfoById(allProducts, itemsID);
+			//calc total
+			if(cartProducts) {
+				cartProducts.forEach(product => {
+					total += parseFloat(product.price);
+				});
+				//convert to stripe form. in pennies.
+				total = total * 100;
+			}
+		}
+		return total;
+    } catch(err){
+        console.log(err);
+    }
 };
 
 PaymentRouter.route('/')
 .post( async (req, res) => {
-	const { items } = req.body;
+	try {
+		const { items } = req.body;
 	// Create a PaymentIntent with the order amount and currency
 	const paymentIntent = await stripe.paymentIntents.create({
-	  amount: calculateOrderAmount(items),
+	  amount: await calculateOrderAmount(items),
 	  currency: "usd"
 	});
 	res.send({
 	  clientSecret: paymentIntent.client_secret
 	});
+	} catch(err) { res.json(err) }
 });
 
-module.exports = PaymentRouter;
+module.exports = PaymentRouter;``
