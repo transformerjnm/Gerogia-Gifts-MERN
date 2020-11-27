@@ -38,7 +38,7 @@ export default function StripeCart(props) {
 			headers: {
 			"Content-Type": "application/json"
 			},
-			body: JSON.stringify({items: [{ id: "xl-tshirt" }]})
+			body: JSON.stringify({items: props.getCartItemsId()})
 		})
 		.then( res => {
 			return res.json();
@@ -122,32 +122,32 @@ export default function StripeCart(props) {
 			</p>
 			<FormGroup className="mb-5">
 				<h4>Who are you?</h4>
-				<Label className="mt-4"  for="name" > Your Name *</Label>
+				<Label className="mt-4"  htmlFor="name" > Your Name *</Label>
 				{/* removed value={props.authUsername} from name input becuse it was causing me to not be able to type. need to implement */}
 				<Input className="form-control mb-4" type="text" name="name" id="name" maxLength="60" required invalid={errors.name} onBlur={HandleBlur} />
 				<FormFeedback className={styles.feedback}>{errors.name}</FormFeedback>
-				<Label className="mt-4" for="email">Your Email *</Label>
+				<Label className="mt-4" htmlFor="email">Your Email *</Label>
 				<Input className="form-control mb-4" type="email" name="email" id="email" required invalid={errors.email} onBlur={HandleBlur}/>
 				<FormFeedback className={styles.feedback}>{errors.email}</FormFeedback>
 			</FormGroup>
 			<FormGroup className="mt-5">
 				<h4 className="mt-5">Where can we ship your goods?</h4>
-				<Label className="mt-4"  for="street">Street *</Label>
+				<Label className="mt-4"  htmlFor="street">Street *</Label>
 				<Input className="form-control mb-4" type="text" name="street" id="street" required invalid={errors.street} onBlur={HandleBlur} spellCheck="true" />			
 				<FormFeedback className={styles.feedback}>{errors.street}</FormFeedback>
-				<Label className="mt-4"  for="city">City *</Label>
+				<Label className="mt-4"  htmlFor="city">City *</Label>
 				<Input className="form-control mb-4" type="text" name="city" id="city" required invalid={errors.city} onBlur={HandleBlur} spellCheck="true" />			
 				<FormFeedback className={styles.feedback}>{errors.city}</FormFeedback>
-				<Label className="mt-4"  for="state">State *</Label>
+				<Label className="mt-4"  htmlFor="state">State *</Label>
 				<Input className="form-control mb-4" type="text" name="state" id="state" required invalid={errors.state} onBlur={HandleBlur} spellCheck="true" />			
 				<FormFeedback className={styles.feedback}>{errors.state}</FormFeedback>
-				<Label className="mt-4"  for="postal_code">Zip Code *</Label>
+				<Label className="mt-4"  htmlFor="postal_code">Zip Code *</Label>
 				<Input className="form-control mb-4" type="text" name="postal_code" id="postal_code" required invalid={errors.postal_code} onBlur={HandleBlur} spellCheck="true" />
 				<FormFeedback className={styles.feedback}>{errors.postal_code}</FormFeedback>
 			</FormGroup>
 			<FormGroup >
 				<h4 className="mt-5">How are you paying today?</h4>
-				<label for="card-element">Credit or debit card</label>
+				<label htmlFor="card-element">Credit or debit card</label>
 				<CardElement options={{hidePostalCode: true}}name="card-element" className={`form-control mb-4 ${styles.stripeElement}`} onChange={HandleBlur} />
 				{/* Show any error that happens when processing the payment */}
 				{paymentError && (
