@@ -10,7 +10,6 @@ let getProductsInfoById = async (products, cartItemsId ) => {
 			let item = Object.values(products[0]).filter( product => product.id === singleId)
 			return item[0];
 		});
-		//console.log(parseFloat(customerProductsInfo[0].price));	
 		return customerProductsInfo;
 	} catch(err) { console.log(err) }
 };
@@ -28,8 +27,8 @@ const calculateOrderAmount = async itemsID => {
 				cartProducts.forEach(product => {
 					total += parseFloat(product.price);
 				});
-				//convert to stripe form. in pennies.
-				total = total * 100;
+				//convert to stripe form. in pennies. plus tax example $14.55 would be 1455 for stripe
+				total = parseInt((total * 1.07) * 100);
 			}
 		}
 		return total;

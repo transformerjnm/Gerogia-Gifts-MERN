@@ -12,6 +12,7 @@ import { Elements } from "@stripe/react-stripe-js";
 const promise = loadStripe('pk_test_51HqS6pFKwuTnRfKPpld5DydVwJjDRH6UPLJt7ckvZLLg3ojOr7SVZtMs2Q6XbrSPnAvq2r0dothg19TfPRnLqD9H00UbMPSlJZ');
 const Cart = (props) => {
     let [products, setProducts] = useState([]);
+    let [confirmOrder, setConfirmOrder] = useState(false);
 
     useEffect(() => {
         getData().then(res => setProducts(res));
@@ -50,29 +51,50 @@ const Cart = (props) => {
                 key++;
                 return(
                     <Row className={styles.borderBottom} key={key}>
-                        <Col md="8"><p><FontAwesomeIcon icon={faTimes} className={styles.removeCartItem + " mr-3"} aria-hidden="true" onClick={() => props.removeCartItem(product.id)}/>{product.name}</p></Col>
+                        <Col md="8">
+                            <p>
+                            {/* React docs way for inline rendering. if confirmOrder === false render else do nothing */}
+                            { confirmOrder === false &&
+                                <FontAwesomeIcon icon={faTimes} className={styles.removeCartItem + " mr-3"} aria-hidden="true" onClick={() => props.removeCartItem(product.id)}/>
+                            }
+                            {product.name}
+                            </p>
+                        </Col>
                         <Col md="4" className={styles.price + "text-right"}><p> Price: ${product.price.$numberDecimal}</p></Col>
                     </Row>
                 );
             });
+            //defaults if cart is empty
             let cartDisplay = <Row className="mt-5"><p>Looks like your cart is empty. Please add some awesome stuff to the cart to proceed. </p></Row>;
             if(props.authenticated) {
                 cartDisplay = <Row className="mt-5"><p>{`${props.authUsername}, Your cart is empty! Please add some awesome stuff to the cart to proceed.`}</p></Row>;
             }
+            //set cart to products if not empty
+            let test = null;
+            if(confirmOrder){
+                test = (<Elements stripe={promise} >
+                    <StripeCart getCartItemsId={props.getCartItemsId} authenticated={props.authenticated} authUsername={props.authUsername}/>
+                </Elements> );
+            }
             if(cartProductsDisplay.length){
                 cartDisplay = (
                     <Fragment>
-                        <Button className="btn col-3 offset-9 mb-5" onClick={() => props.clearCart()}>Clear Cart</Button>
-                        {cartProductsDisplay}            
+                        {/* React docs way for inline rendering. if confirmOrder === false render else do nothing */}
+                        { confirmOrder === false && 
+                            <Button className="btn col-3 offset-9 mb-5" onClick={() => props.clearCart()}>Clear Cart</Button>
+                        }
+                        {cartProductsDisplay}
                         <Row className="mt-5" ><Col className="text-right"><p> Total: ${total.toFixed(2)} </p></Col></Row>
-                        <Row className="mt-5" ><Col className="text-right"><p> Total After Tax(7%): ${( total * 1.07 ).toFixed( 2 )}</p></Col></Row>
-                        <Elements stripe={promise} >
-                            <StripeCart getCartItemsId={props.getCartItemsId} authenticated={props.authenticated} authUsername={props.authUsername}/>
-                        </Elements>      
+                        <Row className="mt-5" ><Col className="text-right"><p> Total After Tax(7%): ${( total * 1.07 ).toFixed( 2 )}</p></Col></Row> 
+                        { confirmOrder === false && 
+                            <Button className="btn col-3 offset-9 mb-5" onClick={() => setConfirmOrder(true)}>Proceed to Checkout</Button>
+                        }
+                        {test}
                     </Fragment>
-                );
+                );                
             }
-            if(cartDisplay){ 
+            //use default if empty cart products display
+            if(cartDisplay) { 
                 return (
                     <Fragment>
                         {cartDisplay}
@@ -87,6 +109,7 @@ const Cart = (props) => {
         <Fade left>
             <Container>
                 {showCartProducts()}
+                
             </Container>
         </Fade>
     );
