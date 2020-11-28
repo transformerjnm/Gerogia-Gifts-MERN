@@ -1,6 +1,6 @@
 # Gerogia-Gifts-MERN
 
-A gift shop website that is powerder by Mongo, Express, React.js, and Node.js
+A gift shop website that is powerder by Mongo, Express, React.js, Stripe, and Node.js
 
 ### view the website at: https://georgia-gifts.herokuapp.com/
 
