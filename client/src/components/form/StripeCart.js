@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import styles from './StripeCart.module.scss';
 import {Button, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import Fade from 'react-reveal/Fade';
 
 export default function StripeCart(props) {
 	//Reactstrap Form state - Name, Email, Address
@@ -107,48 +108,8 @@ export default function StripeCart(props) {
 	};
 
 	return (
-		<Form className="p-5 my-5 mx-auto"  id="payment-form" onSubmit={handleSubmit}>
-			{/* Show any error that happens when processing the payment */}
-			{paymentError && (
-				<div className={styles.cardError} role="alert">
-					{paymentError}
-				</div>
-			)}
-			{/* Show a success message upon completion */}
-			<p className={succeeded ? styles.resultMessage : `${styles.resultMessage} ${styles.hidden}`}>
-				Payment succeeded, see the result in your
-				<a href={ `https://dashboard.stripe.com/test/payments` }>{ " " }Stripe dashboard</a>
-				Refresh the page to pay again.
-			</p>
-			<FormGroup className="mb-5">
-				<h4>Who are you?</h4>
-				<Label className="mt-4"  htmlFor="name" > Your Name *</Label>
-				{/* removed value={props.authUsername} from name input becuse it was causing me to not be able to type. need to implement */}
-				<Input className="form-control mb-4" type="text" name="name" id="name" maxLength="60" required invalid={errors.name} onBlur={HandleBlur} />
-				<FormFeedback className={styles.feedback}>{errors.name}</FormFeedback>
-				<Label className="mt-4" htmlFor="email">Your Email *</Label>
-				<Input className="form-control mb-4" type="email" name="email" id="email" required invalid={errors.email} onBlur={HandleBlur}/>
-				<FormFeedback className={styles.feedback}>{errors.email}</FormFeedback>
-			</FormGroup>
-			<FormGroup className="mt-5">
-				<h4 className="mt-5">Where can we ship your goods?</h4>
-				<Label className="mt-4"  htmlFor="street">Street *</Label>
-				<Input className="form-control mb-4" type="text" name="street" id="street" required invalid={errors.street} onBlur={HandleBlur} spellCheck="true" />			
-				<FormFeedback className={styles.feedback}>{errors.street}</FormFeedback>
-				<Label className="mt-4"  htmlFor="city">City *</Label>
-				<Input className="form-control mb-4" type="text" name="city" id="city" required invalid={errors.city} onBlur={HandleBlur} spellCheck="true" />			
-				<FormFeedback className={styles.feedback}>{errors.city}</FormFeedback>
-				<Label className="mt-4"  htmlFor="state">State *</Label>
-				<Input className="form-control mb-4" type="text" name="state" id="state" required invalid={errors.state} onBlur={HandleBlur} spellCheck="true" />			
-				<FormFeedback className={styles.feedback}>{errors.state}</FormFeedback>
-				<Label className="mt-4"  htmlFor="postal_code">Zip Code *</Label>
-				<Input className="form-control mb-4" type="text" name="postal_code" id="postal_code" required invalid={errors.postal_code} onBlur={HandleBlur} spellCheck="true" />
-				<FormFeedback className={styles.feedback}>{errors.postal_code}</FormFeedback>
-			</FormGroup>
-			<FormGroup >
-				<h4 className="mt-5">How are you paying today?</h4>
-				<label htmlFor="card-element">Credit or debit card</label>
-				<CardElement options={{hidePostalCode: true}}name="card-element" className={`form-control mb-4 ${styles.stripeElement}`} onChange={HandleBlur} />
+		<Fade left>
+			<Form className="p-5 my-5 mx-auto"  id="payment-form" onSubmit={handleSubmit}>
 				{/* Show any error that happens when processing the payment */}
 				{paymentError && (
 					<div className={styles.cardError} role="alert">
@@ -161,21 +122,67 @@ export default function StripeCart(props) {
 					<a href={ `https://dashboard.stripe.com/test/payments` }>{ " " }Stripe dashboard</a>
 					Refresh the page to pay again.
 				</p>
-			</FormGroup>
-			<Button
-				type="submit"
-				className="btn"
-				disabled={processing || disabled || succeeded}
-				id="submit"
-			>
-				<span id="button-text">
-					{processing ? (
-						<div className={styles.spinner} id="spinner"></div>
-					) : (
-						"Pay"
+				<FormGroup className="mb-5">
+					<h4>Who are you?</h4>
+					<Label className="mt-4"  htmlFor="name" > Your Name *</Label>
+					{/* removed value={props.authUsername} from name input becuse it was causing me to not be able to type. need to implement */}
+					<Input className="form-control mb-4" type="text" name="name" id="name" maxLength="60" required invalid={errors.name} onBlur={HandleBlur} />
+					<FormFeedback className={styles.feedback}>{errors.name}</FormFeedback>
+					<Label className="mt-4" htmlFor="email">Your Email *</Label>
+					<Input className="form-control mb-4" type="email" name="email" id="email" required invalid={errors.email} onBlur={HandleBlur}/>
+					<FormFeedback className={styles.feedback}>{errors.email}</FormFeedback>
+				</FormGroup>
+				<FormGroup className="mt-5">
+					<h4 className="mt-5">Where can we ship your goods?</h4>
+					<Label className="mt-4"  htmlFor="street">Street *</Label>
+					<Input className="form-control mb-4" type="text" name="street" id="street" required invalid={errors.street} onBlur={HandleBlur} spellCheck="true" />			
+					<FormFeedback className={styles.feedback}>{errors.street}</FormFeedback>
+					<Label className="mt-4"  htmlFor="city">City *</Label>
+					<Input className="form-control mb-4" type="text" name="city" id="city" required invalid={errors.city} onBlur={HandleBlur} spellCheck="true" />			
+					<FormFeedback className={styles.feedback}>{errors.city}</FormFeedback>
+					<Label className="mt-4"  htmlFor="state">State *</Label>
+					<Input className="form-control mb-4" type="text" name="state" id="state" required invalid={errors.state} onBlur={HandleBlur} spellCheck="true" />			
+					<FormFeedback className={styles.feedback}>{errors.state}</FormFeedback>
+					<Label className="mt-4"  htmlFor="postal_code">Zip Code *</Label>
+					<Input className="form-control mb-4" type="text" name="postal_code" id="postal_code" required invalid={errors.postal_code} onBlur={HandleBlur} spellCheck="true" />
+					<FormFeedback className={styles.feedback}>{errors.postal_code}</FormFeedback>
+				</FormGroup>
+				<FormGroup >
+					<h4 className="mt-5">How are you paying today?</h4>
+					<span>Test Card Succeeds: 4242 4242 4242 4242</span><br></br>
+					<span>Test Card authentication: 4000 0025 0000 3155</span><br></br>
+					<span>Test Card declined: 4000 0000 0000 9995</span><br></br>
+					<span>Any expiration date in future and any cvc</span><br></br>
+					<label htmlFor="card-element">Credit or debit card</label>
+					<CardElement options={{hidePostalCode: true}}name="card-element" className={`form-control mb-4 ${styles.stripeElement}`} onChange={HandleBlur} />
+					{/* Show any error that happens when processing the payment */}
+					{paymentError && (
+						<div className={styles.cardError} role="alert">
+							{paymentError}
+						</div>
 					)}
-				</span>
-			</Button>	
-		</Form>
+					{/* Show a success message upon completion */}
+					<p className={succeeded ? styles.resultMessage : `${styles.resultMessage} ${styles.hidden}`}>
+						Payment succeeded, see the result in your
+						<a href={ `https://dashboard.stripe.com/test/payments` }>{ " " }Stripe dashboard</a>
+						Refresh the page to pay again.
+					</p>
+				</FormGroup>
+				<Button
+					type="submit"
+					className="btn"
+					disabled={processing || disabled || succeeded}
+					id="submit"
+				>
+					<span id="button-text">
+						{processing ? (
+							<div className={styles.spinner} id="spinner"></div>
+						) : (
+							"Pay"
+						)}
+					</span>
+				</Button>	
+			</Form>
+		</Fade>
 	);
 }

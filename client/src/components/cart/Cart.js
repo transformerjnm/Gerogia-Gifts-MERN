@@ -68,14 +68,17 @@ const Cart = (props) => {
             let cartDisplay = <Row className="mt-5"><p>Looks like your cart is empty. Please add some awesome stuff to the cart to proceed. </p></Row>;
             if(props.authenticated) {
                 cartDisplay = <Row className="mt-5"><p>{`${props.authUsername}, Your cart is empty! Please add some awesome stuff to the cart to proceed.`}</p></Row>;
+            }  
+            let stripePaymentForm = null;
+            //if customer order is confirmed then show the stripe cart form for payment
+            if(confirmOrder) {
+               stripePaymentForm = (
+                    <Elements stripe={promise} >
+                        <StripeCart getCartItemsId={props.getCartItemsId} authenticated={props.authenticated} authUsername={props.authUsername}/>
+                    </Elements>
+                );
             }
-            //set cart to products if not empty
-            let test = null;
-            if(confirmOrder){
-                test = (<Elements stripe={promise} >
-                    <StripeCart getCartItemsId={props.getCartItemsId} authenticated={props.authenticated} authUsername={props.authUsername}/>
-                </Elements> );
-            }
+            //set cart to products if customer has products in their cart
             if(cartProductsDisplay.length){
                 cartDisplay = (
                     <Fragment>
@@ -89,7 +92,7 @@ const Cart = (props) => {
                         { confirmOrder === false && 
                             <Button className="btn col-3 offset-9 mb-5" onClick={() => setConfirmOrder(true)}>Proceed to Checkout</Button>
                         }
-                        {test}
+                        {stripePaymentForm}
                     </Fragment>
                 );                
             }
@@ -108,8 +111,7 @@ const Cart = (props) => {
     return(
         <Fade left>
             <Container>
-                {showCartProducts()}
-                
+                {showCartProducts()}           
             </Container>
         </Fade>
     );
