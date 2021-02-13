@@ -6,24 +6,25 @@ import Jump from 'react-reveal/Jump';
 const HeroContent = (props) => {
     return (
         <Jumbotron className={styles.jumbotron}>
-            <Row>
-                <Col sm="4" className="text-center">
-                    <img src={process.env.PUBLIC_URL + '/assets/images/logo.png'}  className={styles.logo + " img-fluid"} alt="Orange Peach logo for Georgia Gifts" />
-                </Col>
-                <Col sm="8" className="align-self-center mt-5 text-center text-md-left">
+            <Row className="align-items-center justify-content-center">
+                <Col sm="5" className="text-center">
                     <Jump>
-                        <h1>Custom southern Gifts</h1>
+                        <h1>Create Happiness<br></br>
+                        For your loved ones.</h1>
                     </Jump>
+                </Col>
+                <Col sm="7">
+                    <img className={styles.giftGivingSvg} src={process.env.PUBLIC_URL + '/assets/images/giftgiving.svg'} alt="Orange Peach logo for Georgia Gifts" />
                 </Col>
             </Row>
             <Row>
-                <Col sm="4" className="text-center mt-5">
+                <Col sm="4" className="text-center mt-1">
                     <i> <address>17 Peachy Ave, Atlanta GA 30589</address> </i>
                 </Col>
-                <Col sm="4" className="text-center mt-5">
-                    <i> <span>770-777-7777</span> </i>                   
+                <Col sm="4" className="text-center mt-1">
+                    <i> <span>770-777-7777</span> </i>
                 </Col>
-                <Col sm="4" className="text-center mt-5">
+                <Col sm="4" className="text-center mt-1">
                     <i> <span>GAGifts@gmail.com</span> </i>
                 </Col>
             </Row>
