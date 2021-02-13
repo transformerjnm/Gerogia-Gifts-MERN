@@ -1,11 +1,8 @@
 @import '../../../public/assets/assets.module.scss';
 .jumbotron {
     font-size: $font1;
-    background-color: $white;  
-    padding: 2rem 1rem;
+    background-color: $off-white;  
 }
-.giftGivingSvg {
-    width: 80%;
-    height: 60vh;
-    margin: 0 10%;
+.logo{
+    max-height: 30vh !important;
 }
