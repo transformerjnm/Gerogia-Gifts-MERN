@@ -7,13 +7,13 @@ const HeroContent = (props) => {
     return (
         <Jumbotron className={styles.jumbotron}>
             <Row className="align-items-center justify-content-center">
-                <Col sm="5" className="text-center">
+                <Col sm="12" md="5" className="text-center">
                     <Jump>
                         <h1>Create Happiness<br></br>
                         For your loved ones.</h1>
                     </Jump>
                 </Col>
-                <Col sm="7">
+                <Col sm="12" md="7">
                     <img className={styles.giftGivingSvg} src={process.env.PUBLIC_URL + '/assets/images/giftgiving.svg'} alt="Orange Peach logo for Georgia Gifts" />
                 </Col>
             </Row>
