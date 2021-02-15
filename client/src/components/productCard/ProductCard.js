@@ -15,7 +15,7 @@ let ProductCard = (props) => {
     const toggle = () => setIsOpen(!isOpen);
     return (
         <Col md="6" lg="4" className="my-5" >
-            <Card className={styles.card} onClick={toggle} onMouseEnter={toggle} onMouseLeave={toggle}>
+            <Card className={styles.card} onClick={toggle}>
                 <CardImg className={styles.cardImg} top src={props.imgSrc} alt={props.imgAlt} />
                 <Collapse isOpen={isOpen}>
                     <CardBody>
