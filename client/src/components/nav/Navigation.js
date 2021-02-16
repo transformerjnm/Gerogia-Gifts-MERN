@@ -32,9 +32,9 @@ const Navigation = props => {
 
 	let authenticationButton;
 	if (props.authenticated) {
-		authenticationButton = <a className={styles.navLink} style={{ fontSize: "1rem", display: "block" }} onClick={logout}>Logout</a>;
+		authenticationButton = <a className={styles.navLink} style={{ fontSize: "1rem", display: "block" }} onClick={() => { logout(); toggleNav(); }}>Logout</a>;
 	} else {
-		authenticationButton = <a className={styles.navLink} style={{ fontSize: "1rem", display: "block" }} onClick={toggleModal}>Login</a>;
+		authenticationButton = <a className={styles.navLink} style={{ fontSize: "1rem", display: "block" }} onClick={() => { toggleModal(); toggleNav(); }}>Login</a>;
 	}
 
 	return (
@@ -47,13 +47,13 @@ const Navigation = props => {
 				<Collapse isOpen={isOpen} navbar>
 					<Nav className="mr-auto ml-auto" navbar>
 						<NavItem>
-							<NavLink exact activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/">Home</NavLink>
+							<NavLink onClick={toggleNav} exact activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/">Home</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/about">About</NavLink>
+							<NavLink onClick={toggleNav} activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/about">About</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/contact">Contact</NavLink>
+							<NavLink onClick={toggleNav} activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/contact">Contact</NavLink>
 						</NavItem>
 						<NavItem>
 							{authenticationButton}
