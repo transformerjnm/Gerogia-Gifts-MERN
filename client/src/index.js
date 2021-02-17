@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import 'typeface-rock-salt';
+import 'typeface-noto-sans';
 import 'typeface-open-sans';
 
 

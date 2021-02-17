@@ -1,16 +1,17 @@
 @import '../../../public/assets/assets.module.scss';
 label {
-    color: $accent-color;
+    color: $text-color;
     font-size: $font1;
 }
 form {
-    background-color: $off-white;
     border-radius: 1rem;
     max-width: 900px;
     input, Select, textarea {
-        border-color: $accent-color !important;
         transition: all 1s ease-in-out;
         border-radius: 1rem !important;
+    }
+    textarea {
+        resize: none;
     }
     input:focus, textarea:focus {
         transform: scale(1.1);  

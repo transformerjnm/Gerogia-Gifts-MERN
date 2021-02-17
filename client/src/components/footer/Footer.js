@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
-    return(
+    return (
         <footer className="container-fluid ">
             <Row>
                 <Col sm="4" className=" align-self-center my-3 text-center">
@@ -22,12 +22,12 @@ const Footer = () => {
                     <br></br><br></br>
                 </Col>
                 <Col sm="4" className="align-self-center my-3 text-center ">
-                    <FontAwesomeIcon icon={faFacebook} className={styles.social + " text-primary" } />
+                    <FontAwesomeIcon icon={faFacebook} className={styles.social + " text-primary"} />
                     <br></br><br></br>
-                    <FontAwesomeIcon icon={faInstagram} className={styles.social + " text-primary" } />
+                    <FontAwesomeIcon icon={faInstagram} className={styles.social + " text-primary"} />
                     <br></br><br></br>
-                    <FontAwesomeIcon icon={faTwitter} className={styles.social + " text-primary" } />
-                    <br></br><br></br>                 
+                    <FontAwesomeIcon icon={faTwitter} className={styles.social + " text-primary"} />
+                    <br></br><br></br>
                 </Col>
                 <Col sm="4" className="align-self-center my-3">
                     <Nav className="mr-auto" navbar>
@@ -40,11 +40,11 @@ const Footer = () => {
                         <NavItem>
                             <NavLink activeClassName={styles.active} className={styles.navLink + " nav-link"} to="/contact">Contact</NavLink>
                         </NavItem>
-                    </Nav>         
-                </Col>               
+                    </Nav>
+                </Col>
             </Row>
             <div className="text-center mt-3">
-                <span>&copy; Copyright 2020 Georgia Gifts</span>
+                <span>&copy; Copyright 2020 - 2021 Georgia Gifts</span>
             </div>
         </footer>
     );
